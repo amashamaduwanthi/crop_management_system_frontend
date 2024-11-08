@@ -96,3 +96,9 @@ header h2 {
     display: none;
     margin-top: 10px;
 }
+#field-section {
+    background:#ffffff ;
+    width: 100%;
+    height: 94vh;
+    overflow-x: hidden;
+}

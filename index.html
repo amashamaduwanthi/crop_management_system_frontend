@@ -147,6 +147,39 @@
             </div>
         </div>
     </div>
+
+    <div class="table-responsive" id="field-table">
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+            <tr>
+                <th>Field Code</th>
+                <th>Field Name</th>
+                <th>Field Location (Coordinate)</th>
+                <th>Extent Size (sq. m)</th>
+                <th>Field Image 1</th>
+                <th>Field Image 2</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Sample Row -->
+            <tr>
+                <td>FC001</td>
+                <td>North Field</td>
+                <td>Lat: 45.123, Long: -93.456</td>
+                <td>1500</td>
+                <td><img src="path/to/image1.jpg" alt="Field Image 1" class="img-thumbnail" width="100"></td>
+                <td><img src="path/to/image2.jpg" alt="Field Image 2" class="img-thumbnail" width="100"></td>
+                <td>
+                    <button class="btn btn-primary btn-sm">Edit</button>
+                    <button class="btn btn-danger btn-sm">Delete</button>
+                </td>
+            </tr>
+            <!-- Additional rows can be added here dynamically -->
+            </tbody>
+        </table>
+    </div>
+
 </section>
 <section id="crop-section">
     <div class="container-fluid light-style flex-grow-1 container-p-y">

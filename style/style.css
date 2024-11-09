@@ -90,7 +90,14 @@ header h2 {
     font-size: 18px;
 }
 
-
+.panel button {
+    background-color: #ffdd57;
+    color: #333;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
 
 .panel-content {
     display: none;

@@ -254,7 +254,7 @@ td {
         width: 50%;
     }
 }
-#field-table{
+.table-responsive{
     margin-top: -30%;
     max-width: 60%;
     margin-left: 35%;

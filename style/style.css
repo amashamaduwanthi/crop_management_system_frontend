@@ -259,6 +259,11 @@ td {
     max-width: 60%;
     margin-left: 35%;
 }
+#staff-table{
+    margin-top: -59%;
+    max-width: 60%;
+    margin-left: 35%;
+}
 @media (max-width:780px) {
     .form-card {
         margin-bottom: 20px;

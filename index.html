@@ -221,7 +221,7 @@
 <!--                            <input type="text" class="form-control mb-4 shadow-none">-->
 <!--                        </div>-->
                         <div class="text-right mt-3">
-                            <button type="button" class="btn btn-warning" id="#saveCrop">Save</button>
+                            <button type="button" class="btn btn-warning" id="saveCrop">Save</button>
                             <button type="button" class="btn btn-info">Cancel</button>
                         </div>
                     </div>
@@ -229,8 +229,41 @@
             </div>
         </div>
     </div>
-    <div class="table-responsive" >
-        <table class="table table-bordered">
+<!--    <div class="table-responsive" >-->
+<!--        <table class="table table-bordered"id="crop_table">-->
+<!--            <thead class="thead-dark">-->
+<!--            <tr>-->
+<!--                <th>Crop Code</th>-->
+<!--                <th>Common Name</th>-->
+<!--                <th>Scientific Name</th>-->
+<!--                <th>Crop Image</th>-->
+<!--                <th>Category</th>-->
+<!--                <th>Season</th>-->
+<!--                <th>Field Code</th>-->
+<!--                <th>Actions</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            &lt;!&ndash; Sample Row &ndash;&gt;-->
+<!--            <tr>-->
+<!--                <td>CR001</td>-->
+<!--                <td>North Field</td>-->
+<!--                <td>Lat: 45.123, Long: -93.456</td>-->
+<!--                <td><img src="path/to/image1.jpg" alt="Field Image 1" class="img-thumbnail" width="100"></td>-->
+<!--                <td>1500</td>-->
+<!--                <td></td>-->
+<!--                <td>FC001</td>-->
+<!--                <td>-->
+<!--                    <button class="btn btn-primary btn-sm">Edit</button>-->
+<!--                    <button class="btn btn-danger btn-sm">Delete</button>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            &lt;!&ndash; Additional rows can be added here dynamically &ndash;&gt;-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    </div>-->
+    <div class="table-responsive">
+        <table class="table table-bordered" id="crop_table">
             <thead class="thead-dark">
             <tr>
                 <th>Crop Code</th>
@@ -244,21 +277,7 @@
             </tr>
             </thead>
             <tbody>
-            <!-- Sample Row -->
-            <tr>
-                <td>CR001</td>
-                <td>North Field</td>
-                <td>Lat: 45.123, Long: -93.456</td>
-                <td><img src="path/to/image1.jpg" alt="Field Image 1" class="img-thumbnail" width="100"></td>
-                <td>1500</td>
-                <td></td>
-                <td>FC001</td>
-                <td>
-                    <button class="btn btn-primary btn-sm">Edit</button>
-                    <button class="btn btn-danger btn-sm">Delete</button>
-                </td>
-            </tr>
-            <!-- Additional rows can be added here dynamically -->
+            <!-- Rows will be dynamically added here -->
             </tbody>
         </table>
     </div>

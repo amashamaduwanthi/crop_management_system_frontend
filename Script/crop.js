@@ -45,6 +45,61 @@ document.getElementById("saveCrop").addEventListener("click", function () {
 
 
 
+// function loadTableData() {
+//     const tableBody = document.querySelector("#crop_table tbody");
+//
+//     // Fetch data from the backend
+//     fetch("http://localhost:5050/Crop_Monitoring_system/api/v1/crop")
+//         .then(response => {
+//             if (response.ok) {
+//                 return response.json();
+//             } else {
+//                 throw new Error("Failed to fetch crops. Status: " + response.status);
+//             }
+//         })
+//         .then(data => {
+//             // Clear the table before populating
+//             tableBody.innerHTML = "";
+//
+//             // Populate the table with fetched data
+//             data.forEach(crop => {
+//                 const row = document.createElement("tr");
+//
+//                 row.innerHTML = `
+//                     <td>${crop.crop_code}</td>
+//                     <td>${crop.common_name}</td>
+//                     <td>${crop.scientific_name}</td>
+//                     <td>
+//                         <img src="data:image/jpeg;base64,${crop.crop_image}" alt="Crop Image"
+//                              class="img-thumbnail" width="50" height="50" style="object-fit: cover;">
+//                     </td>
+//
+//                     <td>${crop.category}</td>
+//                     <td>${crop.season}</td>
+//                     <td>${crop.field_code || ""}</td>
+//                     <td>
+//                         <button class="btn btn-primary btn-sm edit-button" data-id="${crop.crop_code}">Edit</button>
+//                         <button class="btn btn-danger btn-sm delete-button" data-id="${crop.crop_code}">Delete</button>
+//                     </td>
+//                 `;
+//
+//                 tableBody.appendChild(row);
+//             });
+//
+//             // Attach event listeners for "Edit" and "Delete" buttons
+//             attachEventListeners();
+//         })
+//         .catch(error => {
+//             console.error("Error:", error);
+//             alert("An error occurred while loading crop data.");
+//         });
+// }
+//
+
+
+// Load table data on page load
+document.addEventListener("DOMContentLoaded", loadTableData);
+
 function loadTableData() {
     const tableBody = document.querySelector("#crop_table tbody");
 
@@ -65,15 +120,19 @@ function loadTableData() {
             data.forEach(crop => {
                 const row = document.createElement("tr");
 
+                // Check if crop_image is valid and prefix if necessary
+                const base64Image = crop.crop_image.startsWith("data:image")
+                    ? crop.crop_image
+                    : `data:image/jpeg;base64,${crop.crop_image}`;
+
                 row.innerHTML = `
                     <td>${crop.crop_code}</td>
                     <td>${crop.common_name}</td>
                     <td>${crop.scientific_name}</td>
                     <td>
-                        <img src="data:image/jpeg;base64,${crop.crop_image}" alt="Crop Image"
+                        <img src="${base64Image}" alt="Crop Image" 
                              class="img-thumbnail" width="50" height="50" style="object-fit: cover;">
                     </td>
-
                     <td>${crop.category}</td>
                     <td>${crop.season}</td>
                     <td>${crop.field_code || ""}</td>
@@ -95,8 +154,36 @@ function loadTableData() {
         });
 }
 
+function attachEventListeners() {
+    // Attach delete button event listeners
+    const deleteButtons = document.querySelectorAll(".delete-button");
+    deleteButtons.forEach(button => {
+        button.addEventListener("click", (event) => {
+            const cropCode = event.target.getAttribute("data-id");
+            deleteCrop(cropCode, event.target);
+        });
+    });
+}
 
-
-// Load table data on page load
-document.addEventListener("DOMContentLoaded", loadTableData);
-
+// Function to delete crop data
+function deleteCrop(crop_code, deleteButton) {
+    if (confirm("Are you sure you want to delete this crop?")) {
+        fetch(`http://localhost:5050/Crop_Monitoring_system/api/v1/crop/${crop_code}`, {
+            method: "DELETE",
+        })
+            .then(response => {
+                if (response.ok) {
+                    // Remove the corresponding row from the table
+                    const row = deleteButton.closest("tr");
+                    row.remove();
+                    alert("Crop deleted successfully!");
+                } else {
+                    throw new Error("Failed to delete crop. Status: " + response.status);
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("An error occurred while deleting the crop.");
+            });
+    }
+}

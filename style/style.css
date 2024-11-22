@@ -149,7 +149,16 @@ header h2 {
 }
 
 
-
+#searchCrop{
+    position: absolute;
+    top: -1px;
+    right: 35px;
+}
+#cropId{
+    width: 375px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    border-radius: 20px;
+}
 /* Table container */
 .table-responsive {
     overflow-x: auto;

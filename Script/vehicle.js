@@ -23,7 +23,7 @@ document.getElementById('saveVehicle').addEventListener('click', function () {
     const fuelType = document.getElementById('fuel_type').value.trim();
     const status = document.getElementById('status').value.trim();
     const remarks = document.getElementById('remarks').value.trim();
-    const staffId = document.getElementById('id').value.trim();
+    const staffId = document.getElementById('staffComboBox').value.trim();
 
     // Validate form data
     if (!vehicleCode || !licensePlateNumber || !vehicleCategory || !fuelType || !status || !staffId) {

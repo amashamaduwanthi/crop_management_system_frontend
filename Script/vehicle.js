@@ -1,14 +1,14 @@
 
 // Function to clear the form fields after successful submission
-// function clearForm() {
-//     document.getElementById('vehicle_code').value = '';
-//     document.getElementById('license_plate_number').value = '';
-//     document.getElementById('vehicle_category').value = '';
-//     document.getElementById('fuel_type').value = '';
-//     document.getElementById('status').value = '';
-//     document.getElementById('remarks').value = '';
-//     document.getElementById('id').value = '';
-// }
+function clearForm() {
+    document.getElementById('vehicle_code').value = '';
+    document.getElementById('license_plate_number').value = '';
+    document.getElementById('vehicle_category').value = '';
+    document.getElementById('fuel_type').value = '';
+    document.getElementById('status').value = '';
+    document.getElementById('remarks').value = '';
+    document.getElementById('id').value = '';
+}
 
 // Load and display staff data in the table when the page is loaded
 document.getElementById('saveVehicle').addEventListener('click', function () {
@@ -54,7 +54,7 @@ document.getElementById('saveVehicle').addEventListener('click', function () {
             if (response.status === 201) {
                 alert('Vehicle saved successfully!');
                 loadTableDataVehicles();
-                // clearForm();
+                clearForm();
             } else if (response.status === 400) {
                 alert('Invalid data. Please check your inputs.');
             } else {

@@ -1,47 +1,69 @@
-document.getElementById('saveVehicle').addEventListener("click",function (){
-    console.log("clicked")
-    const vehicle_code=document.getElementById("vehicle_code").value;
-    const license_plate_number=document.getElementById("license_plate_number").value;
-    const vehicle_category=document.getElementById("vehicle_category").value;
-    const fuel_type=document.getElementById("fuel_type").value;
-    const status=document.getElementById("status").value;
-    const remarks=document.getElementById("remarks").value;
-    const id=document.getElementById("staffComboBox").value;
+// Event listener for Save button
+document.getElementById('saveVehicle').addEventListener('click', function () {
+    console.log('Save button clicked');
 
-    if(!vehicle_code|| !license_plate_number || !vehicle_category|| !fuel_type|| !status || !remarks||   !id){
-        alert("Please fill in all required fields")
+    // Collect form data
+    const vehicleCode = document.getElementById('vehicle_code').value.trim();
+    const licensePlateNumber = document.getElementById('license_plate_number').value.trim();
+    const vehicleCategory = document.getElementById('vehicle_category').value.trim();
+    const fuelType = document.getElementById('fuel_type').value.trim();
+    const status = document.getElementById('status').value.trim();
+    const remarks = document.getElementById('remarks').value.trim();
+    const staffId = document.getElementById('id').value.trim();
+
+    // Validate form data
+    if (!vehicleCode || !licensePlateNumber || !vehicleCategory || !fuelType || !status || !staffId) {
+        alert('Please fill in all required fields');
+        return;
     }
 
-
-    const vehicleData = {
-        vehicle_code: vehicle_code,
-        license_plate_number: license_plate_number,
-        vehicle_category: vehicle_category,
-        fuel_type: fuel_type,
+    // Construct JSON payload
+    const payload = {
+        vehicle_code: vehicleCode,
+        licensePlateNumber: licensePlateNumber,
+        vehicleCategory: vehicleCategory,
+        fuelType: fuelType,
         status: status,
         remarks: remarks,
-        id: id
+        assigned_staff: {
+            id: staffId
+        }
     };
 
-    fetch("http://localhost:5050/Crop_Monitoring_system/api/v1/vehicle", {
-        method: "POST",
+    // Send data to the backend
+    fetch('http://localhost:6060/Crop_Monitoring_system/api/v1/vehicle', {
+        method: 'POST',
         headers: {
-            "Content-Type": "application/json"
+            'Content-Type': 'application/json'
         },
-        body: JSON.stringify(vehicleData)
+        body: JSON.stringify(payload)
     })
         .then(response => {
-            if (response.ok) {
-                alert("vehicle saved successfully!");
-                // Optionally, you can refresh the staff list or clear the form
-
+            if (response.status === 201) {
+                alert('Vehicle saved successfully!');
+                // Optionally clear form fields
+                clearForm();
+            } else if (response.status === 400) {
+                alert('Invalid data. Please check your inputs.');
             } else {
-                throw new Error("Error saving staff: " + response.statusText);
+                alert('An error occurred. Please try again.');
             }
         })
         .catch(error => {
-            console.error("Error:", error);
-            alert("An error occurred while saving the staff.");
+            console.error('Error saving vehicle:', error);
+            alert('Failed to save vehicle. Check console for details.');
         });
-    console.log(vehicle_code,license_plate_number,vehicle_category,fuel_type,status,remarks,id)
-})
+});
+
+// Function to clear the form fields after successful submission
+function clearForm() {
+    document.getElementById('vehicle_code').value = '';
+    document.getElementById('license_plate_number').value = '';
+    document.getElementById('vehicle_category').value = '';
+    document.getElementById('fuel_type').value = '';
+    document.getElementById('status').value = '';
+    document.getElementById('remarks').value = '';
+    document.getElementById('id').value = '';
+}
+
+

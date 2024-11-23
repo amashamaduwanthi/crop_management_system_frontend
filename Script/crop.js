@@ -20,7 +20,7 @@ document.getElementById("saveCrop").addEventListener("click", function () {
     formData.append("season", season);
     formData.append("cropImage", cropImage);
 
-    fetch("http://localhost:5050/Crop_Monitoring_system/api/v1/crop", {
+    fetch("http://localhost:6060/Crop_Monitoring_system/api/v1/crop", {
         method: "POST",
         body: formData,
         headers: {
@@ -54,7 +54,7 @@ function loadTableData() {
     const tableBody = document.querySelector("#crop_table tbody");
 
     // Fetch data from the backend
-    fetch("http://localhost:5050/Crop_Monitoring_system/api/v1/crop")
+    fetch("http://localhost:6060/Crop_Monitoring_system/api/v1/crop")
         .then(response => {
             if (response.ok) {
                 return response.json();
@@ -119,7 +119,7 @@ function attachEventListenersCrop() {
 // Function to delete crop data
 function deleteCrop(crop_code, deleteButton) {
     if (confirm("Are you sure you want to delete this crop?")) {
-        fetch(`http://localhost:5050/Crop_Monitoring_system/api/v1/crop/${crop_code}`, {
+        fetch(`http://localhost:6060/Crop_Monitoring_system/api/v1/crop/${crop_code}`, {
             method: "DELETE",
         })
             .then(response => {
@@ -143,7 +143,7 @@ function deleteCrop(crop_code, deleteButton) {
 
 
 function updateCrop(crop_code, updatedCropData) {
-    fetch(`http://localhost:5050/Crop_Monitoring_system/api/v1/crop/${crop_code}`, {
+    fetch(`http://localhost:6060/Crop_Monitoring_system/api/v1/crop/${crop_code}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -209,7 +209,7 @@ document.getElementById("searchCrop").addEventListener("click", function () {
         return;
     }
 
-    fetch(`http://localhost:5050/Crop_Monitoring_system/api/v1/crop/${cropCode}`, {
+    fetch(`http://localhost:6060/Crop_Monitoring_system/api/v1/crop/${cropCode}`, {
         method: "GET",
     })
         .then(response => {

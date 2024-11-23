@@ -10,7 +10,9 @@ function clearForm() {
     document.getElementById('id').value = '';
 }
 
-// Load and display staff data in the table when the page is loaded
+
+
+// save method
 document.getElementById('saveVehicle').addEventListener('click', function () {
     console.log('Save button clicked');
 
@@ -170,7 +172,7 @@ function fetchVehicleDetails(vehicleCode) {
         });
 }
 
-// Clear form fields
+
 
 // Load vehicles on page load
 document.addEventListener('DOMContentLoaded', loadTableDataVehicles);

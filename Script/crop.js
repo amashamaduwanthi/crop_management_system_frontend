@@ -209,7 +209,7 @@ document.getElementById("searchCrop").addEventListener("click", function () {
         return;
     }
 
-    fetch(`http://localhost:5050/Crop_Monitoring_system/api/v1/crop/${crop_code}`, {
+    fetch(`http://localhost:5050/Crop_Monitoring_system/api/v1/crop/${cropCode}`, {
         method: "GET",
     })
         .then(response => {

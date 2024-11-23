@@ -96,7 +96,7 @@ function loadTableData() {
             });
 
             // Attach event listeners for "Edit" and "Delete" buttons
-            attachEventListeners();
+            attachEventListenersCrop();
             attachEventListener();
         })
         .catch(error => {
@@ -105,7 +105,7 @@ function loadTableData() {
         });
 }
 
-function attachEventListeners() {
+function attachEventListenersCrop() {
     // Attach delete button event listeners
     const deleteButtons = document.querySelectorAll(".delete-button");
     deleteButtons.forEach(button => {

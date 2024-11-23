@@ -105,11 +105,44 @@ function loadTableData() {
             });
 
             // Attach event listeners for "Edit" and "Delete" buttons
-            attachEventListeners();
-            attachEventListener();
+            attachEventListenersStaff();
+
         })
         .catch(error => {
             console.error("Error:", error);
             alert("An error occurred while loading crop data.");
         });
+}
+function attachEventListenersStaff() {
+    // Attach delete button event listeners
+    const deleteButtons = document.querySelectorAll(".delete-button");
+    deleteButtons.forEach(button => {
+        button.addEventListener("click", (event) => {
+            const id = event.target.getAttribute("data-id");
+            deleteStaff(id, event.target);
+        });
+    });
+}
+
+// Function to delete crop data
+function deleteStaff(id, deleteButton) {
+    if (confirm("Are you sure you want to delete this Staff Member?")) {
+        fetch(`http://localhost:5050/Crop_Monitoring_system/api/v1/staff/${id}`, {
+            method: "DELETE",
+        })
+            .then(response => {
+                if (response.ok) {
+                    // Remove the corresponding row from the table
+                    const row = deleteButton.closest("tr");
+                    row.remove();
+                    alert("Staff Member deleted successfully!");
+                } else {
+                    throw new Error("Failed to delete Staff Member. Status: " + response.status);
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("An error occurred while deleting the Staff Member.");
+            });
+    }
 }

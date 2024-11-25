@@ -8,6 +8,7 @@ function clearCropForm() {
     document.getElementById("category").value = '';
     document.getElementById("season").value = '';
     document.getElementById("cropImage").value = '';
+    document.getElementById("field_code").value = '';
 }
 
 // Save crop method
@@ -18,9 +19,10 @@ document.getElementById("saveCrop").addEventListener("click", function () {
     const category = document.getElementById("category").value.trim();
     const season = document.getElementById("season").value.trim();
     const cropImage = document.getElementById("cropImage").files[0];
+    const field = document.getElementById("field_code").value.trim();
 
     // Validate inputs
-    if (!cropCode || !commonName || !scienceName || !cropImage) {
+    if (!cropCode || !commonName || !scienceName || !cropImage ||!field) {
         alert("Please fill in all required fields!");
         return;
     }
@@ -32,6 +34,7 @@ document.getElementById("saveCrop").addEventListener("click", function () {
     formData.append("category", category);
     formData.append("season", season);
     formData.append("cropImage", cropImage);
+    formData.append("field_code", field);
 
     fetch("http://localhost:6060/Crop_Monitoring_system/api/v1/crop", {
         method: "POST",

@@ -114,39 +114,54 @@
 
                     <div class="card-body">
                         <div class="form-group">
-                            <label class="form-label">Field Code</label>
-                            <input type="text" class="form-control mb-4 shadow-none"id="field_code" >
-                        </div>
-                        <div class="form-group">
                             <label class="form-label">Field Name</label>
-                            <input type="text" class="form-control mb-4 shadow-none" id="field_name">
+                            <input type="text" class="form-control mb-4 shadow-none" placeholder="Enter field name" id="field_name">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Field Location (Coordinate)</label>
-                            <input type="text" class="form-control mb-4 shadow-none"id="field_location" >
+                            <input type="number" class="form-control mb-4 shadow-none" placeholder="Enter GPS coordinates" id="field_location_x">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Field Location (Coordinate)</label>
+                            <input type="number" class="form-control mb-4 shadow-none" placeholder="Enter GPS coordinates" id="field_location_y">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Extent Size (sq. m)</label>
-                            <input type="number" class="form-control mb-4 shadow-none"id="extend_size" >
+                            <input type="text" class="form-control mb-4 shadow-none" placeholder="Enter extent size in sq. m" id="field_size">
                         </div>
-
+                        <div class="form-group">
+                            <label class="form-label">Crops</label>
+                            <select id="crop-type" class="form-control mb-4 shadow-none">
+                                <option value="banana" selected>No Crops</option>
+                                <option value="banana">Banana</option>
+                                <option value="papaya">Papaya</option>
+                                <option value="guava">Guava</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Staff</label>
+                            <select id="staff-type" class="form-control mb-4 shadow-none">
+                                <option value="perera" selected>No Staff Assigned</option>
+                                <option value="perera">Perera</option>
+                                <option value="silva">Silva</option>
+                                <option value="mendis">Mendis</option>
+                            </select>
+                        </div>
                         <div class="form-group">
                             <label class="form-label">Field Image 1</label>
-                            <input type="file" class="form-control mb-4 shadow-none" accept="image/*"id="image1">
+                            <input type="file" class="form-control mb-4 shadow-none" accept="image/*" id="field_image1">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Field Image 2</label>
-                            <input type="file" class="form-control mb-4 shadow-none" accept="image/*" id="image2">
+                            <input type="file" class="form-control mb-4 shadow-none" accept="image/*" id="field_image2">
                         </div>
                         <div class="text-right mt-3">
-                            <button type="button" class="btn btn-warning"id="saveField">Save</button>
-                            <button type="button" class="btn btn-info">Cancel</button>
+                            <button type="button" class="btn btn-warning" onclick="saveField()">Save</button>
+                            <button type="button" class="btn btn-info" onclick="clearFields()">Cancel</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
     <div class="table-responsive" id="field-table">
         <table class="table table-bordered">
@@ -221,10 +236,10 @@
                             <label class="form-label">Season</label>
                             <input type="text" class="form-control mb-4 shadow-none" id="season" >
                         </div>
-<!--                        <div class="form-group">-->
-<!--                            <label class="form-label">Field Code</label>-->
-<!--                            <input type="text" class="form-control mb-4 shadow-none">-->
-<!--                        </div>-->
+                        <div class="form-group">
+                            <label class="form-label">Field Code</label>
+                            <input type="text" class="form-control mb-4 shadow-none"id="field_code">
+                        </div>
                         <div class="text-right mt-3">
                             <button type="button" class="btn btn-warning" id="saveCrop">Save</button>
                             <button type="button" class="btn btn-info">Cancel</button>

@@ -87,7 +87,7 @@ function loadCropTableData() {
                     </td>
                     <td>${crop.category}</td>
                     <td>${crop.season}</td>
-                    <td>crop.field_code || ""</td>
+                    <td>crop.field_code</td>
                     <td>
                         <button class="btn btn-primary btn-sm edit-button" data-id="${crop.crop_code}">Edit</button>
                         <button class="btn btn-danger btn-sm delete-button" data-id="${crop.crop_code}">Delete</button>
@@ -193,3 +193,4 @@ function updateCrop(cropCode, updatedData) {
 
 // Load crops on page load
 document.addEventListener("DOMContentLoaded", loadCropTableData);
+//

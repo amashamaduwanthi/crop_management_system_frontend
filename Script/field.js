@@ -1,81 +1,4 @@
-// document.getElementById("saveField").addEventListener("click", async () => {
-//     const fieldCode = document.getElementById("field_code").value;
-//     const fieldName = document.getElementById("field_name").value;
-//     const extentSize = document.getElementById("extend_size").value;
-//     const location = document.getElementById("field_location").value;
-//     const fieldImage_01 = document.getElementById("image1").files[0];
-//     const fieldImage_02 = document.getElementById("image2").files[0];
-//
-//     if (!fieldCode || !fieldName || !extentSize || !location || !fieldImage_01 || !fieldImage_02) {
-//         alert("Please fill out all fields.");
-//         return;
-//     }
-//
-//     const formData = new FormData();
-//     formData.append("fieldCode", fieldCode);
-//     formData.append("fieldName", fieldName);
-//     formData.append("extentSize", extentSize);
-//     formData.append("location", location);
-//     formData.append("fieldImage_01", fieldImage_01);
-//     formData.append("fieldImage_02", fieldImage_02);
-//
-//     try {
-//         const response = await fetch("http://localhost:6060/Crop_Monitoring_system/api/v1/field", {
-//             method: "POST",
-//             contentType: false,
-//             processData: false,
-//             data: formData,
-//         });
-//
-//         if (!response.ok) {
-//             throw new Error(`Failed to save field. Status: ${response.status}`);
-//         }
-//
-//         alert("Field saved successfully!");
-//     } catch (error) {
-//         console.error("Error saving field:", error);
-//         alert("An error occurred while saving the field.");
-//     }
-// });
 
-// function saveField(){
-//     const formData = new FormData();
-//
-//     formData.append("field_code", $("#field_code").val());
-//     formData.append("field_name", $("#field_name").val());
-//
-//     formData.append("extent_size", $("#extend_size").val());
-//   formData.append("field_location"),
-//
-//     formData.append("field_image1", $("#image1")[0].files[0]);
-//     formData.append("field_image2", $("#image2")[0].files[0]);
-//
-//     $.ajax({
-//         url:"http://localhost:6060/Crop_Monitoring_system/api/v1/field",
-//         method: "POST",
-//         contentType: false,
-//         processData: false,
-//         data: formData,
-//         success: function (result){
-//             clearFields();
-//             console.log(result);
-//             alert("Field Save Successfull");
-//         },
-//         error: function (result){
-//             clearFields();
-//             console.log(result);
-//             alert("Field Save Unsuccessfull");
-//         }
-//     });
-// }
-//
-// function clearFields(){
-//     $("#field_name").val('');
-//     $("#extend_size").val('');
-//     $("#field_location").val('');
-//     $("#image1").val('');
-//     $("#image2").val('');
-// }
 function saveField(){
     const formData = new FormData();
 
@@ -102,6 +25,7 @@ function saveField(){
             clearFields();
             console.log(result);
             alert("Field Save Successfull");
+            loadFieldTableData()
         },
         error: function (result){
             clearFields();
@@ -111,6 +35,151 @@ function saveField(){
     });
 }
 
+function loadFieldTableData() {
+    const tableBody = document.querySelector("#field-table tbody");
+
+    fetch("http://localhost:6060/Crop_Monitoring_system/api/v1/field")
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error("Failed to fetch field. Status: " + response.status);
+            }
+        })
+        .then(data => {
+            tableBody.innerHTML = ""; // Clear existing rows
+
+            data.forEach(field => {
+                const row = document.createElement("tr");
+
+                const base64Image = field.field_image1.startsWith("data:image")
+                    ? field.field_image1
+                    : `data:image/jpeg;base64,${field.field_image1}`;
+
+                const base64Image2 = field.field_image2.startsWith("data:image")
+                    ? field.field_image2
+                    : `data:image/jpeg;base64,${field.field_image2}`;
+
+                row.innerHTML = `
+                    <td>${field.field_code}</td>
+                    <td>${field.field_name}</td>
+                    <td>${field.location}</td>
+                    <td>${field.extend_size}</td>
+                    <td>
+                        <img src="${base64Image}" alt="Field Image1" 
+                             class="img-thumbnail" width="50" height="50" style="object-fit: cover;">
+                    </td>
+                     <td>
+                        <img src="${base64Image2}" alt="Field Image2" 
+                             class="img-thumbnail" width="50" height="50" style="object-fit: cover;">
+                    </td>
+                   
+                    <td>
+                        <button class="btn btn-primary btn-sm edit-button" data-id="${field.field_code}">Edit</button>
+                        <button class="btn btn-danger btn-sm delete-button" data-id="${field.field_code}">Delete</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+
+            attachFieldEventListeners();
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("An error occurred while loading field data.");
+        });
+}
+
+
+
+function attachFieldEventListeners() {
+    // Delete button listeners
+    document.querySelectorAll(".delete-button").forEach(button => {
+        button.addEventListener("click", (event) => {
+            const fieldCode = event.target.getAttribute("data-id");
+            deleteField(fieldCode);
+        });
+    });
+
+    // Edit button listeners
+    document.querySelectorAll(".edit-button").forEach(button => {
+        button.addEventListener("click", (event) => {
+            const fieldCode = event.target.getAttribute("data-id");
+            fetchFieldDetails(fieldCode);
+        });
+    });
+}
+
+// Delete crop
+function deleteField(fieldCode) {
+    if (confirm("Are you sure you want to delete this field?")) {
+        fetch(`http://localhost:6060/Crop_Monitoring_system/api/v1/field/${fieldCode}`, {
+            method: "DELETE",
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert("Field deleted successfully!");
+                   loadFieldTableData()
+                } else {
+                    throw new Error("Failed to delete field. Status: " + response.status);
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("An error occurred while deleting the field.");
+            });
+    }
+}
+
+// Fetch crop details for editing
+function fetchFieldDetails(fieldCode) {
+    fetch(`http://localhost:6060/Crop_Monitoring_system/api/v1/field/${fieldCode}`)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+
+            } else {
+                throw new Error("Failed to fetch field details. Status: " + response.status);
+            }
+        })
+        .then(field => {
+            document.getElementById("field_code").value = field.field_code;
+            document.getElementById("field_name").value = field.field_name;
+            document.getElementById("field_location_x").value = field.field_location_x;
+            document.getElementById("field_location_y").value = field.field_location_y;
+            document.getElementById("field_size").value = field.extend_size;
+        })
+        .catch(error => {
+            console.error("Error fetching field details:", error);
+            alert("An error occurred while fetching crop details.");
+        });
+}
+
+// Update crop
+// function updateCrop(cropCode, updatedData) {
+//     fetch(`http://localhost:6060/Crop_Monitoring_system/api/v1/crop/${cropCode}`, {
+//         method: "PUT",
+//         headers: {
+//             "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify(updatedData),
+//     })
+//         .then(response => {
+//             if (response.ok) {
+//                 alert("Crop updated successfully!");
+//                 loadCropTableData();
+//             } else {
+//                 throw new Error("Failed to update crop. Status: " + response.status);
+//             }
+//         })
+//         .catch(error => {
+//             console.error("Error updating crop:", error);
+//             alert("An error occurred while updating the crop.");
+//         });
+// }
+
+
+document.addEventListener("DOMContentLoaded", loadFieldTableData);
 function clearFields(){
     $("#field_name").val('');
     $("#field_location_x").val('');

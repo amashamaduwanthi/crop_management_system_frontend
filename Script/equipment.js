@@ -93,10 +93,76 @@ function loadTableDataEquipment() {
                 tableBody.appendChild(row);
             });
 
-            attachEventListenersVehicles();
+            attachEventListenersEquipment();
         })
         .catch(error => {
             console.error('Error loading vehicles:', error);
         });
 }
 document.addEventListener('DOMContentLoaded', loadTableDataEquipment);
+
+
+
+// ---------------------------------------------------------------
+// Attach event listeners for edit and delete buttons
+function attachEventListenersEquipment() {
+    document.querySelectorAll('.delete-button').forEach(button => {
+        button.addEventListener('click', event => {
+            const equipment_id = event.target.getAttribute('data-id');
+            deleteEquipment(equipment_id);
+        });
+    });
+
+    document.querySelectorAll('.edit-button').forEach(button => {
+        button.addEventListener('click', event => {
+            const equipment_id = event.target.getAttribute('data-id');
+           fetchEquipmentDetails(equipment_id);
+        });
+    });
+}
+
+// Delete vehicle
+function deleteEquipment(equipment_id) {
+    if (confirm('Are you sure you want to delete this Equipment?')) {
+        fetch(`http://localhost:6060/Crop_Monitoring_system/api/v1/equipment/${equipment_id}`, {
+            method: 'DELETE'
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('equipment deleted successfully!');
+                    loadTableDataEquipment();
+                } else {
+                    throw new Error('Failed to delete equipment: ' + response.statusText);
+                }
+            })
+            .catch(error => {
+                console.error('Error deleting equipment:', error);
+            });
+    }
+}
+
+// Fetch vehicle details for editing
+function fetchEquipmentDetails(equipment_id) {
+    fetch(`http://localhost:6060/Crop_Monitoring_system/api/v1/equipment/${equipment_id}`)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Failed to fetch equipment details: ' + response.statusText);
+            }
+        })
+        .then(equipment => {
+            // Populate form fields for editing
+
+            document.getElementById('eq_name').value = equipment.name;
+            document.getElementById('eq_type').value = equipment.type;
+            document.getElementById('eq_status').value = equipment.status;
+            document.getElementById('eq_staff').value = equipment.assigned_staff?.id||"" ;
+            document.getElementById('eq_field').value = equipment.assigned_field?.field_code||"";
+
+        })
+        .catch(error => {
+            console.error('Error fetching equipment details:', error);
+        });
+}
+

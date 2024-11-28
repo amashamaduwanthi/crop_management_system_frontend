@@ -113,6 +113,11 @@
                 <div class="form-card overflow-hidden">
 
                     <div class="card-body">
+
+                        <div class="form-group">
+                            <label class="form-label">Field Code</label>
+                            <input type="text" class="form-control mb-4 shadow-none" placeholder="Enter field name" id="fieldcode">
+                        </div>
                         <div class="form-group">
                             <label class="form-label">Field Name</label>
                             <input type="text" class="form-control mb-4 shadow-none" placeholder="Enter field name" id="field_name">
@@ -543,27 +548,27 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label class="form-label">Name</label>
-                            <input type="text" class="form-control mb-4 shadow-none" >
+                            <input type="text" class="form-control mb-4 shadow-none" id="eq_name">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Type</label>
-                            <input type="text" class="form-control mb-4 shadow-none" >
+                            <input type="text" class="form-control mb-4 shadow-none" id="eq_type">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Status</label>
-                            <input type="text" class="form-control mb-4 shadow-none" >
+                            <input type="text" class="form-control mb-4 shadow-none" id="eq_status" >
                         </div>
                         <div class="form-group">
                             <label class="form-label">Assigned Staff</label>
-                            <input type="text" class="form-control mb-4 shadow-none" >
+                            <input type="text" class="form-control mb-4 shadow-none" id="eq_staff">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Assigned Field</label>
-                            <input type="text" class="form-control mb-4 shadow-none" >
+                            <input type="text" class="form-control mb-4 shadow-none"id="eq_field" >
 
                         </div>
                         <div class="text-right mt-3">
-                            <button type="button" class="btn btn-warning">Save</button>
+                            <button type="button" class="btn btn-warning"id="save_eq">Save</button>
                             <button type="button" class="btn btn-info">Cancel</button>
                         </div>
                     </div>
@@ -572,15 +577,15 @@
         </div>
     </div>
     <div class="table-responsive" >
-        <table class="table table-bordered">
+        <table class="table table-bordered" id="equipment_table">
             <thead class="thead-dark">
             <tr>
+                <th>ID</th>
                 <th>Name</th>
                 <th>Type</th>
                 <th>Status</th>
-                <th>Crop Image</th>
-                <th>Assigned Staff</th>
                 <th>Assigned Field</th>
+                <th>Assigned Staff</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -700,5 +705,6 @@
 <script src="Script/staff.js"></script>
 <script src="Script/field.js"></script>
 <script src="Script/vehicle.js"></script>
+<script src="Script/equipment.js"></script>
 </body>
 </html>

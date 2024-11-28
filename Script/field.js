@@ -2,6 +2,7 @@
 function saveField(){
     const formData = new FormData();
 
+    formData.append("field_code", $("#fieldcode").val());
     formData.append("field_name", $("#field_name").val());
 
     const location_x = parseInt($("#field_location_x").val());
@@ -63,7 +64,7 @@ function loadFieldTableData() {
                 row.innerHTML = `
                     <td>${field.field_code}</td>
                     <td>${field.field_name}</td>
-                    <td>${field.location}</td>
+                    <td>${field.locaation_x}</td>
                     <td>${field.extend_size}</td>
                     <td>
                         <img src="${base64Image}" alt="Field Image1" 
@@ -145,8 +146,8 @@ function fetchFieldDetails(fieldCode) {
         .then(field => {
             document.getElementById("field_code").value = field.field_code;
             document.getElementById("field_name").value = field.field_name;
-            document.getElementById("field_location_x").value = field.field_location_x;
-            document.getElementById("field_location_y").value = field.field_location_y;
+            document.getElementById("field_location_x").value = field.location_x;
+            document.getElementById("field_location_y").value = field.location_y;
             document.getElementById("field_size").value = field.extend_size;
         })
         .catch(error => {

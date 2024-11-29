@@ -8,7 +8,7 @@ function clearCropForm() {
     document.getElementById("category").value = '';
     document.getElementById("season").value = '';
     document.getElementById("cropImage").value = '';
-    document.getElementById("field_code").value = '';
+    document.getElementById("fieldComboBox").value = '';
 }
 
 // Save crop method
@@ -19,7 +19,7 @@ document.getElementById("saveCrop").addEventListener("click", function () {
     const category = document.getElementById("category").value.trim();
     const season = document.getElementById("season").value.trim();
     const cropImage = document.getElementById("cropImage").files[0];
-    const field = document.getElementById("field_code").value.trim();
+    const field = document.getElementById("fieldComboBox").value.trim();
 
     // Validate inputs
     if (!cropCode || !commonName || !scienceName || !cropImage ||!field) {
@@ -87,7 +87,7 @@ function loadCropTableData() {
                     </td>
                     <td>${crop.category}</td>
                     <td>${crop.season}</td>
-                    <td>crop.field_code</td>
+                    <td>${crop.fieldcode}</td>
                     <td>
                         <button class="btn btn-primary btn-sm edit-button" data-id="${crop.crop_code}">Edit</button>
                         <button class="btn btn-danger btn-sm delete-button" data-id="${crop.crop_code}">Delete</button>
@@ -161,6 +161,7 @@ function fetchCropDetails(cropCode) {
             document.getElementById("scienceName").value = crop.scientific_name;
             document.getElementById("category").value = crop.category;
             document.getElementById("season").value = crop.season;
+            document.getElementById("fieldComboBox").value = crop.field;
         })
         .catch(error => {
             console.error("Error fetching crop details:", error);

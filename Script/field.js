@@ -64,8 +64,8 @@ function loadFieldTableData() {
                 row.innerHTML = `
                     <td>${field.field_code}</td>
                     <td>${field.field_name}</td>
-                    <td>${field.locaation_x}</td>
-                    <td>${field.extend_size}</td>
+                    <td>${field.x}</td>
+                    <td>${field.extent_size}</td>
                     <td>
                         <img src="${base64Image}" alt="Field Image1" 
                              class="img-thumbnail" width="50" height="50" style="object-fit: cover;">
@@ -144,11 +144,11 @@ function fetchFieldDetails(fieldCode) {
             }
         })
         .then(field => {
-            document.getElementById("field_code").value = field.field_code;
+            document.getElementById("fieldcode").value = field.field_code;
             document.getElementById("field_name").value = field.field_name;
-            document.getElementById("field_location_x").value = field.location_x;
-            document.getElementById("field_location_y").value = field.location_y;
-            document.getElementById("field_size").value = field.extend_size;
+            document.getElementById("field_location_x").value = field.x;
+            document.getElementById("field_location_y").value = field.y;
+            document.getElementById("field_size").value = field.extent_size;
         })
         .catch(error => {
             console.error("Error fetching field details:", error);
@@ -189,3 +189,30 @@ function clearFields(){
     $("#field_image1").val('');
     $("#field_image2").val('');
 }
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const staffComboBox = document.getElementById("fieldComboBox");
+
+    // Fetch staff members from backend API
+    fetch("http://localhost:6060/Crop_Monitoring_system/api/v1/field")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Failed to fetch field members.");
+            }
+            return response.json();
+        })
+        .then(staffMembers => {
+            // Populate the combo box
+            staffMembers.forEach(field => {
+                const option = document.createElement("option");
+                option.value = field.field_code; // Assuming staff has an 'id' field
+                option.textContent = `${field.field_code} `; // Adjust fields as necessary
+                staffComboBox.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error("Error loading staff members:", error);
+        });
+});

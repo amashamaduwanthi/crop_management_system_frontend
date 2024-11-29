@@ -175,6 +175,32 @@ document.addEventListener("DOMContentLoaded", loadTableDataStaff);
     });
 
 
+document.addEventListener("DOMContentLoaded", function () {
+    const staff_ComboBox = document.getElementById("staff_ComboBox");
+
+    // Fetch staff members from backend API
+    fetch("http://localhost:6060/Crop_Monitoring_system/api/v1/staff")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Failed to fetch staff members.");
+            }
+            return response.json();
+        })
+        .then(staffMembers => {
+            // Populate the combo box
+            staffMembers.forEach(staff => {
+                const option = document.createElement("option");
+                option.value = staff.id; // Assuming staff has an 'id' field
+                option.textContent = `${staff.id} `; // Adjust fields as necessary
+                staff_ComboBox.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error("Error loading staff members:", error);
+        });
+});
+
+
 // function loadTableDataStaff() {
 //     const tableBody = document.querySelector("#staff-table tbody");
 //

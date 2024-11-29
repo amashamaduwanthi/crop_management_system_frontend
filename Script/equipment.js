@@ -6,8 +6,8 @@ document.getElementById('save_eq').addEventListener('click', function () {
     const name = document.getElementById('eq_name').value.trim();
     const type = document.getElementById('eq_type').value.trim();
     const status = document.getElementById('eq_status').value.trim();
-    const StaffId = document.getElementById('eq_staff').value.trim();
-    const fieldId = document.getElementById('eq_field').value.trim();
+    const StaffId = document.getElementById('staff_ComboBox').value.trim();
+    const fieldId = document.getElementById('field_ComboBox').value.trim();
 
 
 
@@ -44,7 +44,7 @@ document.getElementById('save_eq').addEventListener('click', function () {
         .then(response => {
             if (response.status === 201) {
                 alert('Equipment saved successfully!');
-                loadTableDataVehicles();
+              loadTableDataEquipment()
                 clearForm();
             } else if (response.status === 400) {
                 alert('Invalid data. Please check your inputs.');
@@ -157,8 +157,8 @@ function fetchEquipmentDetails(equipment_id) {
             document.getElementById('eq_name').value = equipment.name;
             document.getElementById('eq_type').value = equipment.type;
             document.getElementById('eq_status').value = equipment.status;
-            document.getElementById('eq_staff').value = equipment.assigned_staff?.id||"" ;
-            document.getElementById('eq_field').value = equipment.assigned_field?.field_code||"";
+            document.getElementById('staff_ComboBox').value = equipment.assigned_staff?.id||"" ;
+            document.getElementById('field_ComboBox').value = equipment.assigned_field?.field_code||"";
 
         })
         .catch(error => {
@@ -166,3 +166,11 @@ function fetchEquipmentDetails(equipment_id) {
         });
 }
 
+function clearForm() {
+    document.getElementById('eq_name').value = '';
+    document.getElementById('eq_type').value = '';
+    document.getElementById('eq_status').value = '';
+    document.getElementById('field_ComboBox').value = '';
+    document.getElementById('staff_ComboBox').value = '';
+
+}

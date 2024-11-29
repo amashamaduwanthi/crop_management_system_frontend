@@ -193,7 +193,7 @@ function clearFields(){
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    const staffComboBox = document.getElementById("fieldComboBox");
+    const fieldComboBox = document.getElementById("fieldComboBox");
 
     // Fetch staff members from backend API
     fetch("http://localhost:6060/Crop_Monitoring_system/api/v1/field")
@@ -203,13 +203,39 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             return response.json();
         })
-        .then(staffMembers => {
+        .then(fieldComboBox => {
             // Populate the combo box
-            staffMembers.forEach(field => {
+            fieldComboBox.forEach(field => {
                 const option = document.createElement("option");
                 option.value = field.field_code; // Assuming staff has an 'id' field
                 option.textContent = `${field.field_code} `; // Adjust fields as necessary
-                staffComboBox.appendChild(option);
+                fieldComboBox.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error("Error loading staff members:", error);
+        });
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const field_comboBox = document.getElementById("field_ComboBox");
+
+    // Fetch staff members from backend API
+    fetch("http://localhost:6060/Crop_Monitoring_system/api/v1/field")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Failed to fetch field members.");
+            }
+            return response.json();
+        })
+        .then(fields => {
+            // Populate the combo box
+            fields.forEach(field => {
+                const option = document.createElement("option");
+                option.value = field.field_code; // Assuming staff has an 'id' field
+                option.textContent = `${field.field_code} `; // Adjust fields as necessary
+                field_comboBox.appendChild(option);
             });
         })
         .catch(error => {

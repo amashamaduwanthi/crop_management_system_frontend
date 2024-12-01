@@ -51,6 +51,7 @@ function loadFieldTableData() {
             tableBody.innerHTML = ""; // Clear existing rows
 
             data.forEach(field => {
+                const locationString = `(${field.location.x}, ${field.location.y})`;
                 const row = document.createElement("tr");
 
                 const base64Image = field.field_image1.startsWith("data:image")
@@ -64,7 +65,7 @@ function loadFieldTableData() {
                 row.innerHTML = `
                     <td>${field.field_code}</td>
                     <td>${field.field_name}</td>
-                    <td>${field.x}</td>
+                    <td>${locationString}</td>
                     <td>${field.extent_size}</td>
                     <td>
                         <img src="${base64Image}" alt="Field Image1" 
@@ -203,9 +204,9 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             return response.json();
         })
-        .then(fieldComboBox => {
+        .then(field => {
             // Populate the combo box
-            fieldComboBox.forEach(field => {
+            field.forEach(field => {
                 const option = document.createElement("option");
                 option.value = field.field_code; // Assuming staff has an 'id' field
                 option.textContent = `${field.field_code} `; // Adjust fields as necessary

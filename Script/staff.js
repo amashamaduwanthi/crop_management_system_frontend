@@ -213,12 +213,13 @@ function fetchStaffDetails(id) {
             document.getElementById('lastName').value = staff.last_name;
             document.getElementById('designation').value = staff.designation;
             document.getElementById('gender').value = staff.gender;
-            document.getElementById('joined_date').value = staff.joined_date;
+            document.getElementById('joinedDate').value = staff.joined_date;
             document.getElementById('dob').value = staff.dob;
             document.getElementById('contact').value = staff.contact_no;
             document.getElementById('email').value = staff.email;
             document.getElementById('line01').value = staff.address;
             document.getElementById('role').value = staff.role;
+
         })
         .catch(error => console.error('Error fetching staff details:', error));
 }

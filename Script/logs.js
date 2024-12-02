@@ -106,8 +106,8 @@ function attachLogEventListeners() {
     // Edit button listeners
     document.querySelectorAll(".edit-button").forEach(button => {
         button.addEventListener("click", (event) => {
-            const fieldCode = event.target.getAttribute("data-id");
-            fetchFieldDetails(fieldCode);
+            const logCode = event.target.getAttribute("data-id");
+           // fetchLogDetails(logCode);
         });
     });
 }
@@ -115,6 +115,31 @@ function attachLogEventListeners() {
 
 
 // ------------------- edit log ----------------------------
+
+function fetchLogDetails(logCode) {
+    fetch(`http://localhost:6060/Crop_Monitoring_system/api/v1/log/${logCode}`)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Failed to fetch log details: ' + response.statusText);
+            }
+        })
+        .then(log => {
+            // Populate form fields for editing
+
+            document.getElementById('log_detail').value = log.log_details;
+            document.getElementById('log_date').value = log.log_date;
+            //document.getElementById('observed_image').value = log.observed_image;
+
+        })
+        .catch(error => {
+            console.error('Error fetching log details:', error);
+        });
+}
+
+
+
 
 //--------------------delete log ---------------------------
 

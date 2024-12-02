@@ -1,5 +1,6 @@
 
 
+var recordIndex;
 // Clear form fields after successful submission
 function clearCropForm() {
     document.getElementById("cropCode").value = '';
@@ -78,16 +79,16 @@ function loadCropTableData() {
                     : `data:image/jpeg;base64,${crop.crop_image}`;
 
                 row.innerHTML = `
-                    <td>${crop.crop_code}</td>
-                    <td>${crop.common_name}</td>
-                    <td>${crop.scientific_name}</td>
-                    <td>
+                    <td class="crop-code-value" >${crop.crop_code}</td>
+                    <td class="crop-name-value">${crop.common_name}</td>
+                    <td class="crop-scientific-value">${crop.scientific_name}</td>
+                    <td >
                         <img src="${base64Image}" alt="Crop Image" 
                              class="img-thumbnail" width="50" height="50" style="object-fit: cover;">
                     </td>
-                    <td>${crop.category}</td>
-                    <td>${crop.season}</td>
-                    <td>${crop.fieldcode}</td>
+                    <td class="crop-category-value">${crop.category}</td>
+                    <td class="crop-season-value">${crop.season}</td>
+                    <td class="crop-field-value">$${crop.field.field_name}</td>
                     <td>
                         <button class="btn btn-primary btn-sm edit-button" data-id="${crop.crop_code}">Edit</button>
                         <button class="btn btn-danger btn-sm delete-button" data-id="${crop.crop_code}">Delete</button>
@@ -115,12 +116,12 @@ function attachCropEventListeners() {
     });
 
     // Edit button listeners
-    document.querySelectorAll(".edit-button").forEach(button => {
-        button.addEventListener("click", (event) => {
-            const cropCode = event.target.getAttribute("data-id");
-            fetchCropDetails(cropCode);
-        });
-    });
+//     document.querySelectorAll(".edit-button").forEach(button => {
+//         button.addEventListener("click", (event) => {
+//             const cropCode = event.target.getAttribute("data-id");
+//             fetchCropDetails();
+//         });
+//     });
 }
 
 // Delete crop
@@ -145,53 +146,80 @@ function deleteCrop(cropCode) {
 }
 
 // Fetch crop details for editing
-function fetchCropDetails(cropCode) {
-    fetch(`http://localhost:6060/Crop_Monitoring_system/api/v1/crop/${cropCode}`)
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-
-            } else {
-                throw new Error("Failed to fetch crop details. Status: " + response.status);
-            }
-        })
-        .then(crop => {
-            document.getElementById("cropCode").value = crop.crop_code;
-            document.getElementById("commonName").value = crop.common_name;
-            document.getElementById("scienceName").value = crop.scientific_name;
-            document.getElementById("category").value = crop.category;
-            document.getElementById("season").value = crop.season;
-            document.getElementById("fieldComboBox").value = crop.field;
-        })
-        .catch(error => {
-            console.error("Error fetching crop details:", error);
-            alert("An error occurred while fetching crop details.");
-        });
-}
+// function fetchCropDetails(cropCode) {
+//     console.log(cropCode)
+//     fetch(`http://localhost:6060/Crop_Monitoring_system/api/v1/crop/${cropCode}`)
+//         .then(response => {
+//             if (response.ok) {
+//                 return response.json();
+//
+//             } else {
+//                 throw new Error("Failed to fetch crop details. Status: " + response.status);
+//             }
+//         })
+//         .then(crop => {
+//             document.getElementById("cropCode").value = crop.crop_code;
+//             document.getElementById("commonName").value = crop.common_name;
+//             document.getElementById("scienceName").value = crop.scientific_name;
+//             document.getElementById("category").value = crop.category;
+//             document.getElementById("season").value = crop.season;
+//             //document.getElementById("fieldComboBox").value = crop.field;
+//         })
+//         .catch(error => {
+//             console.error("Error fetching crop details:", error);
+//             alert("An error occurred while fetching crop details.");
+//         });
+// }
+// function fetchCropDetails(cropCode) {
+//     fetch(`http://localhost:6060/Crop_Monitoring_system/api/v1/crop/${cropCode}`)
+//         .then(response => {
+//             if (response.ok) {
+//                 return response.json();
+//
+//             } else {
+//                 throw new Error("Failed to fetch field details. Status: " + response.status);
+//             }
+//         })
+//         .then(crop => {
+//             document.getElementById("cropCode").value = crop.crop_code;
+//             document.getElementById("commonName").value = crop.common_name;
+//             document.getElementById("scienceName").value = crop.scientific_name;
+//             document.getElementById("season").value = crop.season;
+//             document.getElementById("category").value = crop.category;
+//         })
+//         .catch(error => {
+//             console.error("Error fetching field details:", error);
+//             alert("An error occurred while fetching crop details.");
+//         });
+// }
+//
 
 // Update crop
-function updateCrop(cropCode, updatedData) {
-    fetch(`http://localhost:6060/Crop_Monitoring_system/api/v1/crop/${cropCode}`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedData),
-    })
-        .then(response => {
-            if (response.ok) {
-                alert("Crop updated successfully!");
-                loadCropTableData();
-            } else {
-                throw new Error("Failed to update crop. Status: " + response.status);
-            }
-        })
-        .catch(error => {
-            console.error("Error updating crop:", error);
-            alert("An error occurred while updating the crop.");
-        });
-}
+// function updateCrop(cropCode, updatedData) {
+//     fetch(`http://localhost:6060/Crop_Monitoring_system/api/v1/crop/${cropCode}`, {
+//         method: "PUT",
+//         headers: {
+//              "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify(updatedData),
+//     })
+//         .then(response => {
+//             if (response.ok) {
+//                 alert("Crop updated successfully!");
+//                 loadCropTableData();
+//             } else {
+//                 throw new Error("Failed to update crop. Status: " + response.status);
+//             }
+//         })
+//         .catch(error => {
+//             console.error("Error updating crop:", error);
+//             alert("An error occurred while updating the crop.");
+//         });
+// }
 
 // Load crops on page load
 document.addEventListener("DOMContentLoaded", loadCropTableData);
 //
+
+
+

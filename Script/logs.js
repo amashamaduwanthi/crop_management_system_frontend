@@ -30,6 +30,7 @@ document.getElementById("saveLog").addEventListener("click", function () {
         .then(response => {
             if (response.ok) {
                 alert("Log saved successfully!");
+                loadAllLogs()
                 // loadCropTableData();
                 // clearCropForm();
             } else {
@@ -41,3 +42,63 @@ document.getElementById("saveLog").addEventListener("click", function () {
             alert("An error occurred while saving the log.");
         });
 });
+
+
+
+//----------------------------------------load all logs ------------------------
+function loadAllLogs(){
+    const tableBody = document.querySelector("#monitoringLog_table tbody");
+
+    fetch('http://localhost:6060/Crop_Monitoring_system/api/v1/log')
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error("Failed to load logs: " + response.statusText);
+            }
+        })
+        .then(data => {
+            tableBody.innerHTML = ""; // Clear table before loading
+
+            data.forEach(log => {
+                const row = document.createElement('tr');
+                const base64Image = log.observed_image.startsWith("data:image")
+                    ? field.field_image1
+                    : `data:image/jpeg;base64,${ log.observed_image}`;
+
+                row.innerHTML = `
+
+                    <td>${log.log_code}</td>
+                    <td>${log.log_date}</td>
+                    <td>${log.log_details}</td>
+                    <td>
+                        <img src="${base64Image}" alt="log Image1" 
+                             class="img-thumbnail" width="50" height="50" style="object-fit: cover;">
+                    </td>
+                   
+                    <td>
+                        <button class="btn btn-primary btn-sm edit-button" data-id="${log.equipment_id}">Edit</button>
+                        <button class="btn btn-danger btn-sm delete-button" data-id="${log.equipment_id}">Delete</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+
+            attachEventListenersEquipment();
+        })
+        .catch(error => {
+            console.error('Error loading logs:', error);
+        });
+}
+document.addEventListener('DOMContentLoaded', loadAllLogs);
+
+
+// ------------------- edit log ----------------------------
+//--------------------delete log ---------------------------
+
+
+
+
+
+
+

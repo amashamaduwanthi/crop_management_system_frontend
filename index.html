@@ -257,7 +257,7 @@
         </div>
     </div>
     <div class="table-responsive" >
-        <table class="table table-bordered"id="crop_table">
+        <table class="table table-bordered" id="crop_table">
             <thead class="thead-dark">
             <tr>
                 <th>Crop Code</th>
@@ -270,7 +270,7 @@
                 <th>Actions</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody  id="crop-Table">
             <!-- Sample Row -->
             <tr>
                 <td>CR001</td>
@@ -289,25 +289,7 @@
             </tbody>
         </table>
     </div>
-<!--    <div class="table-responsive">-->
-<!--        <table class="table table-bordered" id="crop_table">-->
-<!--            <thead class="thead-dark">-->
-<!--            <tr>-->
-<!--                <th>Crop Code</th>-->
-<!--                <th>Common Name</th>-->
-<!--                <th>Scientific Name</th>-->
-<!--                <th>Crop Image</th>-->
-<!--                <th>Category</th>-->
-<!--                <th>Season</th>-->
-<!--                <th>Field Code</th>-->
-<!--                <th>Actions</th>-->
-<!--            </tr>-->
-<!--            </thead>-->
-<!--            <tbody>-->
-<!--            &lt;!&ndash; Rows will be dynamically added here &ndash;&gt;-->
-<!--            </tbody>-->
-<!--        </table>-->
-<!--    </div>-->
+
 
 </section>
 
@@ -670,34 +652,22 @@
         </div>
     </div>
     <div class="table-responsive" >
-        <table class="table table-bordered">
+        <table class="table table-bordered" id="monitoringLog_table">
             <thead class="thead-dark">
             <tr>
                 <th>Log Code</th>
                 <th>Log Date</th>
                 <th>Log Details</th>
                 <th>observed Image</th>
-                <th>Assigned Staff</th>
-                <th>Assigned Crop</th>
-                <th>Assigned Field Code</th>
+<!--                <th>Assigned Staff</th>-->
+<!--                <th>Assigned Crop</th>-->
+<!--                <th>Assigned Field Code</th>-->
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
             <!-- Sample Row -->
-            <tr>
-                <td>CR001</td>
-                <td>North Field</td>
-                <td>Lat: 45.123, Long: -93.456</td>
-                <td><img src="path/to/image1.jpg" alt="Field Image 1" class="img-thumbnail" width="100"></td>
-                <td>1500</td>
-                <td></td>
-                <td>FC001</td>
-                <td>
-                    <button class="btn btn-primary btn-sm">Edit</button>
-                    <button class="btn btn-danger btn-sm">Delete</button>
-                </td>
-            </tr>
+
             <!-- Additional rows can be added here dynamically -->
             </tbody>
         </table>

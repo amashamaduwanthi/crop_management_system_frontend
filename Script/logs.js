@@ -77,14 +77,14 @@ function loadAllLogs(){
                     </td>
                    
                     <td>
-                        <button class="btn btn-primary btn-sm edit-button" data-id="${log.equipment_id}">Edit</button>
-                        <button class="btn btn-danger btn-sm delete-button" data-id="${log.equipment_id}">Delete</button>
+                        <button class="btn btn-primary btn-sm edit-button" data-id="${log.log_code}">Edit</button>
+                        <button class="btn btn-danger btn-sm delete-button" data-id="${log.log_code}">Delete</button>
                     </td>
                 `;
                 tableBody.appendChild(row);
             });
 
-            attachEventListenersEquipment();
+            attachLogEventListeners();
         })
         .catch(error => {
             console.error('Error loading logs:', error);
@@ -93,10 +93,51 @@ function loadAllLogs(){
 document.addEventListener('DOMContentLoaded', loadAllLogs);
 
 
+
+function attachLogEventListeners() {
+    // Delete button listeners
+    document.querySelectorAll(".delete-button").forEach(button => {
+        button.addEventListener("click", (event) => {
+            const logCode = event.target.getAttribute("data-id");
+            deletelog(logCode);
+        });
+    });
+
+    // Edit button listeners
+    document.querySelectorAll(".edit-button").forEach(button => {
+        button.addEventListener("click", (event) => {
+            const fieldCode = event.target.getAttribute("data-id");
+            fetchFieldDetails(fieldCode);
+        });
+    });
+}
+
+
+
 // ------------------- edit log ----------------------------
+
 //--------------------delete log ---------------------------
 
-
+// Delete crop
+function deletelog(logCode) {
+    if (confirm("Are you sure you want to delete this log?")) {
+        fetch(`http://localhost:6060/Crop_Monitoring_system/api/v1/log/${logCode}`, {
+            method: "DELETE",
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert("log deleted successfully!");
+                    loadAllLogs()
+                } else {
+                    throw new Error("Failed to delete field. Status: " + response.status);
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("An error occurred while deleting the log.");
+            });
+    }
+}
 
 
 

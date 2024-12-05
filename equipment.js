@@ -96,7 +96,7 @@ function loadTableDataEquipment() {
             attachEventListenersEquipment();
         })
         .catch(error => {
-            console.error('Error loading vehicles:', error);
+            console.error('Error loading equipments:', error);
         });
 }
 document.addEventListener('DOMContentLoaded', loadTableDataEquipment);

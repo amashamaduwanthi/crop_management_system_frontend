@@ -107,7 +107,7 @@ function attachLogEventListeners() {
     document.querySelectorAll(".edit-button").forEach(button => {
         button.addEventListener("click", (event) => {
             const logCode = event.target.getAttribute("data-id");
-           // fetchLogDetails(logCode);
+            fetchLogDetails(logCode);
         });
     });
 }

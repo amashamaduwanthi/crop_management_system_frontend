@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Crop Management System</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style/style.css" />
+    <link rel="stylesheet" href="style.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -272,18 +272,8 @@
             </thead>
             <tbody  id="crop-Table">
             <!-- Sample Row -->
-            <tr>
-                <td>CR001</td>
-                <td>North Field</td>
-                <td>Lat: 45.123, Long: -93.456</td>
-                <td><img src="path/to/image1.jpg" alt="Field Image 1" class="img-thumbnail" width="100"></td>
-                <td>1500</td>
-                <td></td>
-                <td>FC001</td>
-                <td>
-                    <button class="btn btn-primary btn-sm">Edit</button>
-                    <button class="btn btn-danger btn-sm">Delete</button>
-                </td>
+            <tr id="table_crop">
+
             </tr>
             <!-- Additional rows can be added here dynamically -->
             </tbody>
@@ -676,17 +666,17 @@
 
 </section>
 
-<script src="lib/jquery-3.7.1.min.js"></script>
+<script src="jquery-3.7.1.min.js"></script>
 <!-- bootstrap js -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<script src="Script/script.js"></script>
-<script src="Script/crop.js"></script>
-<script src="Script/staff.js"></script>
-<script src="Script/field.js"></script>
-<script src="Script/vehicle.js"></script>
-<script src="Script/equipment.js"></script>
-<script src="Script/logs.js"></script>
-<script src="Script/controlller.js"></script>
+<script src="script.js"></script>
+<script src="crop.js"></script>
+<script src="staff.js"></script>
+<script src="field.js"></script>
+<script src="vehicle.js"></script>
+<script src="equipment.js"></script>
+<script src="logs.js"></script>
+<script src="controlller.js"></script>
 </body>
 </html>

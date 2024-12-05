@@ -88,7 +88,7 @@ function loadCropTableData() {
                     </td>
                     <td class="crop-category-value">${crop.category}</td>
                     <td class="crop-season-value">${crop.season}</td>
-                    <td class="crop-field-value">$${crop.field.field_name}</td>
+<!--                    <td class="crop-field-value">$${crop.field.field_name}</td>-->
                     <td>
                         <button class="btn btn-primary btn-sm edit-button" data-id="${crop.crop_code}">Edit</button>
                         <button class="btn btn-danger btn-sm delete-button" data-id="${crop.crop_code}">Delete</button>
@@ -118,58 +118,59 @@ function attachCropEventListeners() {
     // Edit button listeners
 //     document.querySelectorAll(".edit-button").forEach(button => {
 //         button.addEventListener("click", (event) => {
-//             const cropCode = event.target.getAttribute("data-id");
-//             fetchCropDetails();
+//             const crop_code = event.target.getAttribute("data-id");
+//             fetchCropDetails(crop_code);
 //         });
 //     });
-}
+// }
 
 // Delete crop
-function deleteCrop(cropCode) {
-    if (confirm("Are you sure you want to delete this crop?")) {
-        fetch(`http://localhost:6060/Crop_Monitoring_system/api/v1/crop/${cropCode}`, {
-            method: "DELETE",
-        })
-            .then(response => {
-                if (response.ok) {
-                    alert("Crop deleted successfully!");
-                    loadCropTableData();
-                } else {
-                    throw new Error("Failed to delete crop. Status: " + response.status);
-                }
+    function deleteCrop(cropCode) {
+        if (confirm("Are you sure you want to delete this crop?")) {
+            fetch(`http://localhost:6060/Crop_Monitoring_system/api/v1/crop/${cropCode}`, {
+                method: "DELETE",
             })
-            .catch(error => {
-                console.error("Error:", error);
-                alert("An error occurred while deleting the crop.");
-            });
+                .then(response => {
+                    if (response.ok) {
+                        alert("Crop deleted successfully!");
+                        loadCropTableData();
+                    } else {
+                        throw new Error("Failed to delete crop. Status: " + response.status);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("An error occurred while deleting the crop.");
+                });
+        }
     }
-}
 
 // Fetch crop details for editing
-// function fetchCropDetails(cropCode) {
-//     console.log(cropCode)
-//     fetch(`http://localhost:6060/Crop_Monitoring_system/api/v1/crop/${cropCode}`)
-//         .then(response => {
-//             if (response.ok) {
-//                 return response.json();
-//
-//             } else {
-//                 throw new Error("Failed to fetch crop details. Status: " + response.status);
-//             }
-//         })
-//         .then(crop => {
-//             document.getElementById("cropCode").value = crop.crop_code;
-//             document.getElementById("commonName").value = crop.common_name;
-//             document.getElementById("scienceName").value = crop.scientific_name;
-//             document.getElementById("category").value = crop.category;
-//             document.getElementById("season").value = crop.season;
-//             //document.getElementById("fieldComboBox").value = crop.field;
-//         })
-//         .catch(error => {
-//             console.error("Error fetching crop details:", error);
-//             alert("An error occurred while fetching crop details.");
-//         });
-// }
+    function fetchCropDetails(crop_code) {
+        console.log(crop_code)
+        fetch(`http://localhost:6060/Crop_Monitoring_system/api/v1/crop/${crop_code}`)
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+
+                } else {
+                    throw new Error("Failed to fetch crop details. Status: " + response.status);
+                }
+            })
+            .then(crop => {
+                document.getElementById("cropCode").value = crop.crop_code;
+                document.getElementById("commonName").value = crop.common_name;
+                document.getElementById("scienceName").value = crop.scientific_name;
+                document.getElementById("category").value = crop.category;
+                document.getElementById("season").value = crop.season;
+                //document.getElementById("fieldComboBox").value = crop.field;
+            })
+            .catch(error => {
+                console.error("Error fetching crop details:", error);
+                alert("An error occurred while fetching crop details.");
+            });
+    }
+
 // function fetchCropDetails(cropCode) {
 //     fetch(`http://localhost:6060/Crop_Monitoring_system/api/v1/crop/${cropCode}`)
 //         .then(response => {
@@ -217,9 +218,26 @@ function deleteCrop(cropCode) {
 //         });
 // }
 
+
 // Load crops on page load
-document.addEventListener("DOMContentLoaded", loadCropTableData);
+    document.addEventListener("DOMContentLoaded", loadCropTableData);
 //
 
 
+    $("#table_crop").on("click", ".update-button", function () {
+        const row = $(this).closest("tr");
+        const crop_code = row.find(".crop-code-value").text();
+        const crop_name = row.find(".crop-name-value").text();
+        const scientific_name = row.find(".crop-scientific-value").text();
+        const category = row.find(".crop-category-value").text();
+        const season = row.find(".crop-season-value").text();
+        const field_name = row.find(".crop-field-value").text();
 
+        $("#cropCode").val(crop_code);
+        $("#commonName").val(crop_name);
+        $("#scienceName").val(scientific_name);
+        $("#category").val(category);
+        $("#season").val(season);
+        $("#field_details").val(field_name !== "Unassigned" ? field_name : "");
+    });
+}

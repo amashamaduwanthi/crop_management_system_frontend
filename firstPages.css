@@ -1,0 +1,122 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #fff;
+}
+
+/* Container Styling */
+.auth-container {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 90%;
+    max-width: 400px;
+    padding: 20px;
+    color: #333;
+}
+
+/* Form Header */
+.auth-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #00c6ff;
+}
+
+/* Input Group Styling */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: #00c6ff;
+}
+
+/* Button Styling */
+#btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #0072ff, #00c6ff);
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+#btn:hover {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    transform: scale(1.05);
+}
+
+/* Response Message Styling */
+#responseMessage {
+    display: none;
+    color: red;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* Link Styling */
+.auth-form p {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.auth-form a {
+    color: #00c6ff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.auth-form a:hover {
+    color: #0072ff;
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+    .auth-container {
+        padding: 15px;
+    }
+
+    #btn {
+        font-size: 14px;
+    }
+
+    .auth-form h2 {
+        font-size: 18px;
+    }
+}

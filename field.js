@@ -183,6 +183,7 @@ function fetchFieldDetails(fieldCode) {
 
 document.addEventListener("DOMContentLoaded", loadFieldTableData);
 function clearFields(){
+    $("#fieldcode")
     $("#field_name").val('');
     $("#field_location_x").val('');
     $("#field_location_y").val('');

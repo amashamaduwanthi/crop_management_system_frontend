@@ -31,8 +31,7 @@ document.getElementById("saveLog").addEventListener("click", function () {
             if (response.ok) {
                 alert("Log saved successfully!");
                 loadAllLogs()
-                // loadCropTableData();
-                // clearCropForm();
+               clearLogs()
             } else {
                 alert("Error saving Log: " + response.statusText);
             }
@@ -165,6 +164,11 @@ function deletelog(logCode) {
 }
 
 
+function clearLogs(){
+    $("#log_detail").val('');
+    $("#log_date").val('');
+
+}
 
 
 

@@ -1,13 +1,13 @@
 
 // Function to clear the form fields after successful submission
-function clearForm() {
-    document.getElementById('vehicle_code').value = '';
-    document.getElementById('license_plate_number').value = '';
-    document.getElementById('vehicle_category').value = '';
-    document.getElementById('fuel_type').value = '';
-    document.getElementById('status').value = '';
-    document.getElementById('remarks').value = '';
-    document.getElementById('id').value = '';
+function clearVehicleForm() {
+    $("#vehicle_code").val('');
+    $("#license_plate_number").val('');
+    $("#vehicle_category").val('');
+    $("#fuel_type").val('');
+    $("#status").val('');
+    $("#remarks").val('');
+    $("#staffComboBox").val('');
 }
 
 
@@ -56,7 +56,7 @@ document.getElementById('saveVehicle').addEventListener('click', function () {
             if (response.status === 201) {
                 alert('Vehicle saved successfully!');
                 loadTableDataVehicles();
-                clearForm();
+                clearVehicleForm();
             } else if (response.status === 400) {
                 alert('Invalid data. Please check your inputs.');
             } else {

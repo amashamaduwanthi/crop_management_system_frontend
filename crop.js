@@ -1,5 +1,5 @@
 
-
+document.addEventListener("DOMContentLoaded", loadCropTableData);
 var recordIndex;
 // Clear form fields after successful submission
 function clearCropForm() {
@@ -88,7 +88,7 @@ function loadCropTableData() {
                     </td>
                     <td class="crop-category-value">${crop.category}</td>
                     <td class="crop-season-value">${crop.season}</td>
-<!--                    <td class="crop-field-value">$${crop.field.field_name}</td>-->
+                    <td class="crop-field-value">${crop.field.field_name}</td>
                     <td>
                         <button class="btn btn-primary btn-sm edit-button" data-id="${crop.crop_code}">Edit</button>
                         <button class="btn btn-danger btn-sm delete-button" data-id="${crop.crop_code}">Delete</button>
@@ -220,7 +220,7 @@ function attachCropEventListeners() {
 
 
 // Load crops on page load
-    document.addEventListener("DOMContentLoaded", loadCropTableData);
+
 //
 
 

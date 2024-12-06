@@ -70,7 +70,7 @@ $('#signUpForm').on('submit', function (event) {
             console.log(response); // Debugging purposes
             localStorage.setItem('jwtToken', response.token); // Store the JWT token
             alert('Sign-up successful!');
-            window.location.href = 'index.html'; // Redirect to dashboard
+            // window.location.href = 'index.html'; // Redirect to dashboard
         },
         error: function (xhr) {
             console.error(xhr);

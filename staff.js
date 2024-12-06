@@ -195,6 +195,7 @@ function deleteStaff(id) {
                 if (response.ok) {
                     alert('Staff deleted successfully!');
                     loadTableDataStaff();
+                    clearStaff()
                 } else {
                     alert('Failed to delete staff.');
                 }

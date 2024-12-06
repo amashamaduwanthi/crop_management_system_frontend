@@ -120,7 +120,7 @@
 
                         <div class="form-group">
                             <label class="form-label">Field Code</label>
-                            <input type="text" class="form-control mb-4 shadow-none" placeholder="Enter field name" id="fieldcode">
+                            <input type="text" class="form-control mb-4 shadow-none" placeholder="Enter field Code" id="fieldcode">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Field Name</label>
@@ -138,24 +138,24 @@
                             <label class="form-label">Extent Size (sq. m)</label>
                             <input type="text" class="form-control mb-4 shadow-none" placeholder="Enter extent size in sq. m" id="field_size">
                         </div>
-                        <div class="form-group">
-                            <label class="form-label">Crops</label>
-                            <select id="crop-type" class="form-control mb-4 shadow-none">
-                                <option value="banana" selected>No Crops</option>
-                                <option value="banana">Banana</option>
-                                <option value="papaya">Papaya</option>
-                                <option value="guava">Guava</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Staff</label>
-                            <select id="staff-type" class="form-control mb-4 shadow-none">
-                                <option value="perera" selected>No Staff Assigned</option>
-                                <option value="perera">Perera</option>
-                                <option value="silva">Silva</option>
-                                <option value="mendis">Mendis</option>
-                            </select>
-                        </div>
+<!--                        <div class="form-group">-->
+<!--                            <label class="form-label">Crops</label>-->
+<!--                            <select id="crop-type" class="form-control mb-4 shadow-none">-->
+<!--                                <option value="banana" selected>No Crops</option>-->
+<!--                                <option value="banana">Banana</option>-->
+<!--                                <option value="papaya">Papaya</option>-->
+<!--                                <option value="guava">Guava</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label class="form-label">Staff</label>-->
+<!--                            <select id="staff-type" class="form-control mb-4 shadow-none">-->
+<!--                                <option value="perera" selected>No Staff Assigned</option>-->
+<!--                                <option value="perera">Perera</option>-->
+<!--                                <option value="silva">Silva</option>-->
+<!--                                <option value="mendis">Mendis</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
                         <div class="form-group">
                             <label class="form-label">Field Image 1</label>
                             <input type="file" class="form-control mb-4 shadow-none" accept="image/*" id="field_image1">
@@ -223,15 +223,15 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label class="form-label">Crop Code</label>
-                            <input type="text" class="form-control mb-4 shadow-none" id="cropCode" >
+                            <input type="text" class="form-control mb-4 shadow-none" id="cropCode" placeholder="Enter Crop Code">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Common Name</label>
-                            <input type="text" class="form-control mb-4 shadow-none" id="commonName" >
+                            <input type="text" class="form-control mb-4 shadow-none" id="commonName"placeholder="Enter the Common Name" >
                         </div>
                         <div class="form-group">
                             <label class="form-label">Scientific Name</label>
-                            <input type="text" class="form-control mb-4 shadow-none" id="scienceName">
+                            <input type="text" class="form-control mb-4 shadow-none" id="scienceName"placeholder="Enter the scienceName">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Crop Image</label>
@@ -240,11 +240,11 @@
                         <div class="form-group">
                             <label class="form-label">Category</label>
                             <input type="text" class="form-control mb-4 shadow-none"
-                                   id="category">
+                                   id="category"placeholder="category">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Season</label>
-                            <input type="text" class="form-control mb-4 shadow-none" id="season" >
+                            <input type="text" class="form-control mb-4 shadow-none" id="season" placeholder="season">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Field Details</label>
@@ -300,19 +300,24 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="staffId">Staff ID</label>
-                            <input type="text" class="form-control" id="staffId" required>
+                            <input type="text" class="form-control" id="staffId" required placeholder="Enter the Staff Id">
                         </div>
                         <div class="form-group">
                             <label class="form-label">First Name</label>
-                            <input type="text" class="form-control mb-4 shadow-none" id="firstName" >
+                            <input type="text" class="form-control mb-4 shadow-none" id="firstName"placeholder="Enter the First Name" >
                         </div>
                         <div class="form-group">
                             <label class="form-label">Last Name</label>
-                            <input type="text" class="form-control mb-4 shadow-none" id="lastName">
+                            <input type="text" class="form-control mb-4 shadow-none" id="lastName"placeholder="Enter the Last Name">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Designation</label>
-                            <input type="text" class="form-control mb-4 shadow-none" id="designation">
+                            <select id="designation" name="role" class="from-select" required>
+                                <option value="MANAGER">MANAGER</option>
+                                <option value="ADMINISTRATIVE">ADMINISTRATIVE</option>
+                                <option value="SCIENTIST">SCIENTIST</option>
+                                <option value="OTHER">OTHER</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Gender</label>
@@ -332,15 +337,15 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">Contact No.</label>
-                            <input type="text" class="form-control mb-4 shadow-none" id="contact">
+                            <input type="text" class="form-control mb-4 shadow-none" id="contact"placeholder="0712378765">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Email</label>
-                            <input type="email" class="form-control mb-4 shadow-none"id="email" >
+                            <input type="email" class="form-control mb-4 shadow-none"id="email"placeholder="amashamaduwanthi123@gmail.com" >
                         </div>
                         <div class="form-group">
                             <label class="form-label">Address Line 01</label>
-                            <input type="text" class="form-control mb-4 shadow-none" id="line01">
+                            <input type="text" class="form-control mb-4 shadow-none" id="line01"placeholder="23/8 kuruwila Kurunagala">
                         </div>
 <!--                        <div class="form-group">-->
 <!--                            <label class="form-label">Address Line 02</label>-->
@@ -357,7 +362,12 @@
 
                         <div class="form-group">
                             <label for="role">Role</label>
-                            <input type="text" class="form-control" id="role" required>
+                            <select id="role" name="role" class="from-select" required>
+                                <option value="MANAGER">MANAGER</option>
+                                <option value="ADMINISTRATIVE">ADMINISTRATIVE</option>
+                                <option value="SCIENTIST">SCIENTIST</option>
+                                <option value="OTHER">OTHER</option>
+                            </select>
                         </div>
 
                         <div class="form-group">
@@ -439,20 +449,31 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label class="form-label">Vehicle Code</label>
-                            <input type="text" class="form-control mb-4 shadow-none" id="vehicle_code">
+                            <input type="text" class="form-control mb-4 shadow-none" id="vehicle_code"placeholder="Enter the vehicle no">
                         </div>
                         <div class="form-group">
                             <label class="form-label">License Plate Number</label>
-                            <input type="text" class="form-control mb-4 shadow-none"id="license_plate_number" >
+                            <input type="text" class="form-control mb-4 shadow-none"id="license_plate_number"placeholder="NB-3396" >
                         </div>
                         <div class="form-group">
                             <label class="form-label">Vehicle Category</label>
-                            <input type="text" class="form-control mb-4 shadow-none" id="vehicle_category">
+
+                            <select  id="vehicle_category" name="role" class="from-select" required>
+                                <option value="CAR">CAR</option>
+                                <option value="VAN">VAN</option>
+                                <option value="LORRY">LORRY</option>
+                                <option value="OTHER">OTHER</option>
+                            </select>
 
                         </div>
                         <div class="form-group">
                             <label class="form-label">Fuel Type</label>
-                            <input type="text" class="form-control mb-4 shadow-none"id="fuel_type" >
+
+                            <select id="fuel_type" name="role" class="from-select" required>
+                                <option value="Petrol">PETROL</option>
+                                <option value="DEASAL">DEASLE</option>
+                                <option value="OTHER">OTHER</option>
+                            </select>
 
                         </div>
                         <div class="form-group">
@@ -528,12 +549,16 @@
                 <div class="form-card overflow-hidden">
                     <div class="card-body">
                         <div class="form-group">
+                            <label class="form-label">Id</label>
+                            <input type="text" class="form-control mb-4 shadow-none" id="eq_id"placeholder="Enter your Eq - id">
+                        </div>
+                        <div class="form-group">
                             <label class="form-label">Name</label>
-                            <input type="text" class="form-control mb-4 shadow-none" id="eq_name">
+                            <input type="text" class="form-control mb-4 shadow-none" id="eq_name"placeholder="Enter Name">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Type</label>
-                            <input type="text" class="form-control mb-4 shadow-none" id="eq_type">
+                            <input type="text" class="form-control mb-4 shadow-none" id="eq_type"placeholder="Enter Type">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Status</label>
@@ -606,34 +631,40 @@
                 <!-- Form Section -->
                 <div class="form-card overflow-hidden">
                     <div class="card-body">
-<!--                        <div class="form-group">-->
-<!--                            <label class="form-label">Log Code</label>-->
-<!--                            <input type="text" class="form-control mb-4 shadow-none" >-->
-<!--                        </div>-->
+                        <br>
+                        <br>
+                        <p>Please Enter you Log Details In this Form </p>
+                        <br>
+                        <br>
+
+                        <div class="form-group">
+                            <label class="form-label">Log Code</label>
+                            <input type="text" class="form-control mb-4 shadow-none"id="logCode" placeholder="Enter your log Code">
+                        </div>
                         <div class="form-group">
                             <label class="form-label">Log Date</label>
                             <input type="Date" class="form-control mb-4 shadow-none"id="log_date" >
                         </div>
                         <div class="form-group">
                             <label class="form-label">Log Details</label>
-                            <input type="text" class="form-control mb-4 shadow-none" id="log_detail">
+                            <input type="text" class="form-control mb-4 shadow-none" id="log_detail"placeholder="Enter your Details">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Observed Image</label>
                             <input type="File" class="form-control mb-4 shadow-none"id="observed_image" >
                         </div>
-                        <div class="form-group">
-                            <label class="form-label">Assigned Staff</label>
-                            <input type="text" class="form-control mb-4 shadow-none" id="assigned_id">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Assigned Field</label>
-                            <input type="text" class="form-control mb-4 shadow-none" id="assigned_field">
+<!--                        <div class="form-group">-->
+<!--                            <label class="form-label">Assigned Staff</label>-->
+<!--                            <input type="text" class="form-control mb-4 shadow-none" id="assigned_id">-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label class="form-label">Assigned Field</label>-->
+<!--                            <input type="text" class="form-control mb-4 shadow-none" id="assigned_field">-->
 
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Assigned Crop</label>
-                            <input type="text" class="form-control mb-4 shadow-none" id="assigned_crop">
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label class="form-label">Assigned Crop</label>-->
+<!--                            <input type="text" class="form-control mb-4 shadow-none" id="assigned_crop">-->
 
                         </div>
                         <div class="text-right mt-3">

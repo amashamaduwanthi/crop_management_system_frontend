@@ -2,7 +2,7 @@ document.getElementById('save_eq').addEventListener('click', function () {
     console.log('Save button clicked');
 
     // Collect form data
-    // const vehicleCode = document.getElementById('vehicle_code').value.trim();
+    const eqId = document.getElementById('eq_id').value.trim();
     const name = document.getElementById('eq_name').value.trim();
     const type = document.getElementById('eq_type').value.trim();
     const status = document.getElementById('eq_status').value.trim();
@@ -21,8 +21,8 @@ document.getElementById('save_eq').addEventListener('click', function () {
 
     // Construct JSON payload
     const payload = {
-        // vehicle_code: vehicleCode,
-       name: name,
+        equipment_id: eqId,
+        name: name,
         type: type,
         status: status,
         assigned_staff: {
@@ -153,7 +153,7 @@ function fetchEquipmentDetails(equipment_id) {
         })
         .then(equipment => {
             // Populate form fields for editing
-
+            document.getElementById('eq_id').value = equipment.equipment_id;
             document.getElementById('eq_name').value = equipment.name;
             document.getElementById('eq_type').value = equipment.type;
             document.getElementById('eq_status').value = equipment.status;
@@ -167,6 +167,7 @@ function fetchEquipmentDetails(equipment_id) {
 }
 
 function clearForm() {
+    document.getElementById('eq_id').value = '';
     document.getElementById('eq_name').value = '';
     document.getElementById('eq_type').value = '';
     document.getElementById('eq_status').value = '';

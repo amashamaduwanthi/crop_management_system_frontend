@@ -1,6 +1,6 @@
 // Save crop method
 document.getElementById("saveLog").addEventListener("click", function () {
-    // const cropCode = document.getElementById("cropCode").value.trim();
+    const logCode = document.getElementById("logCode").value.trim();
     const logDate = document.getElementById("log_date").value.trim();
     const logDetails = document.getElementById("log_detail").value.trim();
     const observedImage = document.getElementById("observed_image").files[0];
@@ -15,6 +15,7 @@ document.getElementById("saveLog").addEventListener("click", function () {
     }
 
     const formData = new FormData();
+    formData.append("logCode", logCode);
     formData.append("logDate", logDate);
     formData.append("logDetails", logDetails);
     formData.append("observedImage", observedImage);
@@ -126,7 +127,7 @@ function fetchLogDetails(logCode) {
         })
         .then(log => {
             // Populate form fields for editing
-
+            document.getElementById('logCode').value = log.log_code;
             document.getElementById('log_detail').value = log.log_details;
             document.getElementById('log_date').value = log.log_date;
             //document.getElementById('observed_image').value = log.observed_image;
@@ -165,6 +166,7 @@ function deletelog(logCode) {
 
 
 function clearLogs(){
+    $("#logCode").val('');
     $("#log_detail").val('');
     $("#log_date").val('');
 
